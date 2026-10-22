@@ -93,6 +93,6 @@ if (typeof process !== 'undefined' && process.argv && process.argv[1]?.includes(
   console.log(`Normalizer Tests: ${result.passed} passed, ${result.failed} failed.`)
   if (result.errors.length > 0) {
     console.error(result.errors.join('\n\n'))
-    process.exit(1)
+    process.exit?.(1)
   }
 }
