@@ -1,0 +1,54 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Production & Build Outputs
+dist
+dist-ssr
+**/dist
+build
+*.tsbuildinfo
+
+# Environment & Secret Files (Root & Subdirectories)
+.env
+.env.*
+*.env
+*.env.*
+.env.txt
+*.env.txt
+**/.env
+**/.env.*
+**/*.env
+**/*.env.*
+**/*.env.txt
+*.local
+*.pem
+*.key
+*.cert
+credentials.json
+
+# Allow environment example templates
+!.env.example
+!**/.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor directories and OS files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
