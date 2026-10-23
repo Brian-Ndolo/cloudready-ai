@@ -2,6 +2,7 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import path from 'path'
 import { isGeminiConfigured, askGemini, OFFICIAL_AZ900_SOURCES } from './ai.js'
 
 dotenv.config()
@@ -9,8 +10,15 @@ dotenv.config()
 const app = express()
 const PORT = Number(process.env.PORT) || 3000
 
+// In production the compiled server lives at server/dist/index.js.
+// The React build is output to dist/ at the project root (two levels up).
+const FRONTEND_DIST = path.join(__dirname, '..', '..', 'dist')
+
 app.use(cors())
 app.use(express.json({ limit: '10kb' }))
+
+// Serve the built React frontend as static files
+app.use(express.static(FRONTEND_DIST))
 
 // --------------------
 // Types
@@ -458,6 +466,12 @@ app.post('/api/quiz/submit', (req, res) => {
 })
 
 
+
+// SPA catch-all: serve index.html for any route not matched by the API
+// This must come AFTER all /api/* routes
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(FRONTEND_DIST, 'index.html'))
+})
 
 app.listen(PORT, () => {
   const currentMode = isGeminiConfigured() ? 'gemini AI' : 'curated'
